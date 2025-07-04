@@ -1,0 +1,11 @@
+{
+    "name": "hookpress/hookpress",
+    "description": "Theis plugin aims to be a resource to learn about WP Hooks, not meant for production.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "Hookpress\\": "includes/"
+        }
+    }
+}
