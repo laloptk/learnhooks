@@ -1,8 +1,8 @@
 <?php 
 
 /*
- * Plugin Name: HookPress
- * text-domain: hookpress
+ * Plugin Name: LearnHooks
+ * text-domain: learnhooks
  */
 
 defined('ABSPATH') || exit;
