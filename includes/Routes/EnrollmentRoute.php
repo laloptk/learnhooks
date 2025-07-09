@@ -28,7 +28,7 @@ class EnrollmentRoute extends AbstractRoute {
         ];
     }
 
-    protected function callback(WP_REST_Request $request): WP_REST_Response {
+    public function callback(WP_REST_Request $request): WP_REST_Response {
         $user_id   = absint( $request->get_param( 'user_id' ) );
         $course_id = absint( $request->get_param( 'course_id' ) );
         $service = new EnrollmentService();

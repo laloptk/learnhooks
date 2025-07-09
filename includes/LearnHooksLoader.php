@@ -4,6 +4,7 @@ namespace LearnHooks;
 
 use LearnHooks\Contracts\HookableInterface;
 use LearnHooks\Listeners\EnrollmentLogger;
+use LearnHooks\Routes\EnrollmentRoute;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -27,6 +28,7 @@ class LearnHooksLoader {
 	protected function register_services(): void {
 		$services = [
 			EnrollmentLogger::class,
+            EnrollmentRoute::class,
 			// Add more classes here as you build them
 		];
 

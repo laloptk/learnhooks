@@ -1,6 +1,6 @@
 <?php
 
-namespace LearnHooks\EnrollmentService;
+namespace LearnHooks\Services;
 
 defined( 'ABSPATH' ) || exit;
 

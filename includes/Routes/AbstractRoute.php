@@ -88,5 +88,5 @@ abstract class AbstractRoute implements HookableInterface {
      *
      * This method must return a WP_REST_Response object (or array that WordPress will convert).
      */
-    abstract protected function callback(WP_REST_Request $request): WP_REST_Response;
+    abstract public function callback(WP_REST_Request $request): WP_REST_Response;
 }
