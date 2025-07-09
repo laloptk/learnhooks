@@ -1,35 +1,41 @@
-<?php 
+<?php
 
 namespace LearnHooks;
-// Singleton class that serves as a hook registrar
+
+use LearnHooks\Contracts\HookableInterface;
+use LearnHooks\Listeners\EnrollmentLogger;
+
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Class Loader
+ *
+ * Loads and registers all hookable classes in the plugin.
+ */
 class LearnHooksLoader {
-    
-    // Singletons must have a protected constructor
-    public function __construct() {
-        
-    }
 
-    public static function register() {
-        self::$instance = new self(); // Keep the instance to be able to deregister
-        // WP Core PHP hooks go here
-		add_action( 'admin_notices', [ self::$instance, 'admin_notice' ] );
-
-		// Example filter
-		add_filter( 'learninghooks/slogan', [ self::$instance, 'default_slogan' ] );
-    }
-
-    public function admin_notice(): void {
-		echo '<div class="notice notice-info"><p>LearningHooks plugin initialized.</p></div>';
+	/**
+	 * Initialize the plugin.
+	 */
+	public function __construct() {
+		$this->register_services();
 	}
 
-	public function default_slogan( string $slogan ): string {
-		return $slogan . ' — filtered by LearningHooks';
-	}
+	/**
+	 * Instantiates and registers all hookable classes.
+	 */
+	protected function register_services(): void {
+		$services = [
+			EnrollmentLogger::class,
+			// Add more classes here as you build them
+		];
 
-    public static function deregister() {
-        if ( self::$instance ) {
-            remove_action( 'hook_name', [ self::$instance, 'method_name' ] );
-        }
-    }
+		foreach ( $services as $service_class ) {
+			$instance = new $service_class();
+
+			if ( $instance instanceof HookableInterface ) {
+				$instance->register_hooks();
+			}
+		}
+	}
 }
-
