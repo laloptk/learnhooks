@@ -15,19 +15,12 @@ add_action( 'plugins_loaded', function() {
 	new LearnHooksLoader();
 } );
 
-/* This action trigger is for testing pouposes only
-add_action( 'init', function () {
-	if ( isset( $_GET['test_enroll'] ) ) {
-		$enroller = new EnrollmentService();
-		$enroller->enroll_user( 123, get_current_user_id() );
-	}
-} );*/
-
-add_action( 'rest_api_init', function () {
-    register_rest_route( 'test/v1', '/ping', [
-        'methods' => 'GET',
-        'callback' => function () {
-            return rest_ensure_response([ 'pong' => true ]);
-        },
-    ]);
-});
+add_action( 'admin_enqueue_scripts', function () {
+	wp_enqueue_script(
+		'learnhooks-enrollment',
+		plugins_url( 'build/index.js', __FILE__ ),
+		['wp-hooks'],
+		filemtime( plugin_dir_path( __FILE__ ) . 'src/enrollment.js' ),
+		true // in footer
+	);
+} );

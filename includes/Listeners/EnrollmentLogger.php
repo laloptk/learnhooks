@@ -20,7 +20,7 @@ class EnrollmentLogger implements HookableInterface {
      * @param array $data
      */
     public function log_generic_enrollment( array $data ): void {
-        error_log( "[LearningHooks] [Generic] User {$data['user_id']} enrolled in course {$data['course_id']} from Logger" );
+        error_log( "[LearningHooks] [Generic] Send notification that user {$data['user_id']} was enrolled in {$data['course_id']}" );
     }
 
     /**
