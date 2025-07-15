@@ -15,12 +15,32 @@ add_action( 'plugins_loaded', function() {
 	new LearnHooksLoader();
 } );
 
-add_action( 'admin_enqueue_scripts', function () {
-	wp_enqueue_script(
-		'learnhooks-enrollment',
-		plugins_url( 'build/index.js', __FILE__ ),
-		['wp-hooks'],
-		filemtime( plugin_dir_path( __FILE__ ) . 'src/enrollment.js' ),
-		true // in footer
-	);
-} );
+add_action( 'enqueue_block_editor_assets', 'learnhooks_enqueue_editor_assets' );
+
+function learnhooks_enqueue_editor_assets() {
+    wp_enqueue_script(
+        'learnhooks-editor', // Handle
+        plugins_url( 'build/index.js', __FILE__ ), // Path to compiled JS
+        [ 
+            'wp-blocks', 
+            'wp-i18n', 
+            'wp-element', 
+            'wp-editor', 
+            'wp-components', 
+            'wp-compose', 
+            'wp-hooks', 
+        ], 
+        filemtime( plugin_dir_path( __FILE__ ) . 'build/index.js' ), // Cache-bust
+        true // Load in footer
+    );
+
+    // Optional: If you also have editor-only CSS
+    if ( file_exists( plugin_dir_path( __FILE__ ) . 'build/index.css' ) ) {
+        wp_enqueue_style(
+            'learnhooks-editor-style',
+            plugins_url( 'build/index.css', __FILE__ ),
+            [],
+            filemtime( plugin_dir_path( __FILE__ ) . 'build/index.css' )
+        );
+    }
+}
