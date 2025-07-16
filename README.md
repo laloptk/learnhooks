@@ -277,6 +277,7 @@ learnhooks/
 - ✅ Phase 3: Simple Gutenberg block extension
 - ✅ Phase 4: AbstractBlockExtension + meta-extensibility
 - 🔜 Phase 5: Introspection Mode + Debug Panel
+- 🔜 Phase 6: Use hooks inside a custom Gutenberg block
 - 🔜 More PHP & JS hook examples
 - 🔜 PHP & JS hook tips & tricks
 
