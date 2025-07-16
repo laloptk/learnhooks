@@ -40,7 +40,7 @@ addFilter(
     'learnhooks/try-modified-props',
     (modifiedProps, blockName, attributes, namespace) => {
         console.log('Run this filter before saving the props that will show as HTML attributes in the front-end.');
-        return modifiedProps
+        return modifiedProps;
     }
 )
 
