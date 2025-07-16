@@ -33,14 +33,5 @@ function learnhooks_enqueue_editor_assets() {
         filemtime( plugin_dir_path( __FILE__ ) . 'build/index.js' ), // Cache-bust
         true // Load in footer
     );
-
-    // Optional: If you also have editor-only CSS
-    if ( file_exists( plugin_dir_path( __FILE__ ) . 'build/index.css' ) ) {
-        wp_enqueue_style(
-            'learnhooks-editor-style',
-            plugins_url( 'build/index.css', __FILE__ ),
-            [],
-            filemtime( plugin_dir_path( __FILE__ ) . 'build/index.css' )
-        );
-    }
 }
+

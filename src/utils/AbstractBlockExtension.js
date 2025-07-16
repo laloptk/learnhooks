@@ -27,19 +27,19 @@ class AbstractBlockExtension {
         addFilter(
             'blocks.registerBlockType',               // Filter called during block registration
             `learnhooks/add-${this.#namespace}-attr`, // Unique namespace for this modification
-            this.addAttributes.bind(this);
+            this.addAttributes.bind(this)
         );
         
         addFilter(
             'editor.BlockEdit',                       // Filter that lets us wrap the block edit UI
             `learnhooks/${this.#namespace}-controls`, // Namespace
-            this.addControls.bind(this);              // Our plain function
+            this.addControls.bind(this)               // Our plain function
         );
 
         addFilter(
             'blocks.getSaveContent.extraProps',        // Filter before saving block markup
             `learnhooks/save-${this.#namespace}-attr`, // Namespace
-            this.addProps.bind(this);
+            this.addProps.bind(this)
         );
 
         doAction('learnhooks.afterInit', this.#namespace, this.#blockToExtend);
@@ -50,7 +50,7 @@ class AbstractBlockExtension {
         
         if(! blockName) {
             throw new Error("The name of the block you want to extend is not valid.");
-        } else if(name !== blockName) {
+        } else if(name != blockName) {
             return settings;
         }
 
@@ -58,14 +58,14 @@ class AbstractBlockExtension {
             ...settings,
             attributes: {
                 ...settings.attributes,
-                dataTrackingId: {
+                customAlt: {
                     type: 'string',
                     default: '',
                 },
             },
         };
 
-         modifiedSettings = applyFilters(
+        modifiedSettings = applyFilters(
             'learnhooks.modifyAttributes',
             modifiedSettings,
             name,
@@ -115,7 +115,7 @@ class AbstractBlockExtension {
         }
 
         // Delegate to user-defined function for multiple modifications
-        const modifiedProps = this.#propsModifier(extraProps, attributes);
+        let modifiedProps = this.#propsModifier(extraProps, attributes);
 
          modifiedProps = applyFilters(
             'learnhooks.modifySaveProps',
@@ -164,3 +164,5 @@ class AbstractBlockExtension {
     }
 
 }
+
+export default AbstractBlockExtension;
