@@ -278,6 +278,7 @@ learnhooks/
 - ✅ Phase 4: AbstractBlockExtension + meta-extensibility
 - 🔜 Phase 5: Introspection Mode + Debug Panel
 - 🔜 More PHP & JS hook examples
+- 🔜 PHP & JS hook tips & tricks
 
 ---
 
